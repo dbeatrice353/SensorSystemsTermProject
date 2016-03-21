@@ -1,4 +1,6 @@
-# node-js-getting-started
+# SensorSystemsTermProject
+
+[everything below is from the README of the heroku node app template]
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 
