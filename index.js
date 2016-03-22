@@ -39,11 +39,35 @@ app.get('/testnode', function(request, response) {
 
 // Receive "hello" messages from nodes (POST)
 app.post('/hello', function (req, res) {
+  var node_id = 1; // set to 1 for now...
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    // yes, this is a security vulnerability...
+    client.query('UPDATE sensor_node SET last_hello = NOW() WHERE id = ' + node_id + ';', function(err, result) {
+      done();
+      if (err){
+        console.error(err); res.send("Error " + err);
+      } else {
+        res.send('success');
+      }
+    });
+  });
 });
 
 // Receive alerts from nodes (POST)
 app.post('/alert', function (req, res) {
-});
+  var node_id = 1; // set to 1 for now...
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    // yes, this is a security vulnerability...
+    client.query('INSERT INTO alert (node_id,time) VALUES ('+node_id+',NOW());', function(err, result) {
+      done();
+      if (err){
+        console.error(err); res.send("Error " + err);
+      } else {
+        res.send('success');
+      }
+    });
+  });
+})
 
 // Respond to data update requests from the web interface (GET)
 app.get('/data', function (req, res) {

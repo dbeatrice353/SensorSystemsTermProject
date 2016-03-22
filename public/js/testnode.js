@@ -18,6 +18,12 @@ The code does 2 things:
 // send an alert back to the server
 function send_alert(){
   console.log(Date() + " *alert sent*");
+  // send the post
+  $.post("/alert",  // destination
+          {node_id:1},  // data
+          function(data,status){  //callback
+              alert("Data: " + data + "\nStatus: " + status);
+          });
 }
 
 // bind the alert dispacher "send_alert" to the button
