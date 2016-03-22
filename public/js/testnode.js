@@ -22,7 +22,8 @@ function send_alert(){
   $.post("/alert",  // destination
           {node_id:1},  // data
           function(data,status){  //callback
-              alert("Data: " + data + "\nStatus: " + status);
+              // uncomment the alert for debugging purposes
+              // alert("(alert) Data: " + data + "\nStatus: " + status);
           });
 }
 
@@ -36,6 +37,12 @@ function say_hello(){
   var hello_period = 3; // seconds between each "hello"
   setInterval(function(){
       console.log(Date() + " *hello sent*");
+      $.post("/hello",  // destination
+              {node_id:1},  // data
+              function(data,status){  //callback
+                  // uncomment the alert for debugging purposes
+                  //alert("(hello) Data: " + data + "\nStatus: " + status);
+              });
     }, hello_period*1000);
 }
 
