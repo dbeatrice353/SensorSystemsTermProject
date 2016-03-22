@@ -4,3 +4,7 @@ Commands to create the tables:
 
 create table sensor_node (id integer, last_hello timestamp);
 create table alert (node_id integer, alert_id serial, time timestamp);
+
+Alter the alert table:
+
+alter table alert rename column alert_id to id;
